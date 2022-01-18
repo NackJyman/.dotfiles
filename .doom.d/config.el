@@ -67,10 +67,6 @@
       doom-modeline-minor-modes nil
       doom-modeline-enable-word-count nil)
 
-;; Keybinds
-;; Quickly switch between corresponding files
-(global-set-key (kbd "C-x C-o") 'ff-find-other-file)
-
 ;;; Modules
 ;;; :editor evil
 ;; Focus new window after splitting
@@ -97,7 +93,7 @@
 
 ;; Wakatime
 (global-wakatime-mode)
-(setq-default wakatime-cli-path "/home/joshua/.wakatime/wakatime-cli-linux-amd64")
+(setq-default wakatime-cli-path "~/.wakatime/wakatime-cli-linux-amd64")
 
 ;; Clangd LSP
 (setq lsp-clients-clangd-args '("--background-index"
@@ -119,7 +115,7 @@
 ;;         normally we'd recommend hooking orui after org-roam, but since org-roam does not have
 ;;         a hookable mode anymore, you're advised to pick something yourself
 ;;         if you don't care about startup time, use
-;;  :hook (after-init . org-roam-ui-mode)
+    :hook (after-init . org-roam-ui-mode)
     :config
     (setq org-roam-ui-sync-theme t
           org-roam-ui-follow t
@@ -131,4 +127,7 @@
 (setq twittering-icon-mode t)
 (setq twittering-use-icon-storage t)
 
+;; Default python environment
+(after! pyvenv
+  (pyvenv-workon "base"))
 ;; config.el ends here
