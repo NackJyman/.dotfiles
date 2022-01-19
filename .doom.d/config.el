@@ -18,8 +18,7 @@
 
 (setq-default delete-by-moving-to-trash t)
 
-(setq undo-limit 80000000
-      evil-want-fine-undo t)
+(setq undo-limit 80000000 )
 
 (display-time-mode 1)
 
@@ -92,8 +91,8 @@
   (add-hook 'evil-normal-state-entry-hook #'company-abort)) ;; make aborting less annoying.
 
 ;; Wakatime
+(setq-default wakatime-cli-path (expand-file-name "~/.wakatime/wakatime-cli-linux-amd64"))
 (global-wakatime-mode)
-(setq-default wakatime-cli-path "~/.wakatime/wakatime-cli-linux-amd64")
 
 ;; Clangd LSP
 (setq lsp-clients-clangd-args '("--background-index"
@@ -106,7 +105,7 @@
 (after! lsp-clangd (set-lsp-priority! 'clangd 2))
 
 ;; Org-roam
-(setq org-roam-directory "~/repos/brain")
+(setq org-roam-directory "~/org/brain")
 (use-package! websocket
     :after org-roam)
 
@@ -130,4 +129,14 @@
 ;; Default python environment
 (after! pyvenv
   (pyvenv-workon "base"))
-;; config.el ends here
+
+;; == Magit ==
+(after! magit
+  (setq magit-diff-refine-hunk 'all))
+
+;; == Evil Mode ==
+(setq evil-move-cursor-back nil
+      evil-want-fine-undo t)
+
+;; Bring back s/S
+(remove-hook 'doom-first-input-hook #'evil-snipe-mode)
